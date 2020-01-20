@@ -23,8 +23,7 @@ After reading this article, you'll be able:
 
 ## Concepts
 Here are a few concepts that you should be acquainted with as you go through this article. Don't worry if you
-aren't an expert with them, just understand their importance and how the structure is able to enable us to utilize
-these concepts.
+aren't an expert with them, just understand their importance and how the structure enables us to utilize these concepts.
 
 * [SOLID](https://scotch.io/bar-talk/s-o-l-i-d-the-first-five-principles-of-object-oriented-design)
 * [Separation of Concerns](https://medium.com/machine-words/separation-of-concerns-1d735b703a60)
