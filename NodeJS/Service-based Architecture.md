@@ -26,9 +26,9 @@ aren't an expert with them, just understand their importance and how the structu
 
 * [SOLID](https://scotch.io/bar-talk/s-o-l-i-d-the-first-five-principles-of-object-oriented-design)
 * [Separation of Concerns](https://medium.com/machine-words/separation-of-concerns-1d735b703a60)
-* [Abstraction]()
-* [Encapsulation]()
-* [Unit Testing]()
+* [Abstraction](https://thevaluable.dev/abstraction-software-development/)
+* [Encapsulation](https://stackify.com/oop-concept-for-beginners-what-is-encapsulation/)
+* [Unit Testing](https://stackoverflow.com/a/1393/4515720)
 
 ## Project Folder Structure
 The below structure is what I use as a template in nearly all of my Node.js projects. This enables us to 
