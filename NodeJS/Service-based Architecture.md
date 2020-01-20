@@ -110,7 +110,7 @@ async function createCord ( req, res ) {
 }
 ```
 
-Our service implements all of our logic and cna leverage the data access layer to
+Our service implements all of our logic and can leverage the data access layer to
 interact with the database! Once our logic reaches a result, we return the data, or an 
 error if one occurred, to the controller.
 ```javascript
