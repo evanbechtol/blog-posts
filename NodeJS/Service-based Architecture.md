@@ -21,6 +21,15 @@ After reading this article, you'll be able:
   7) Application Configurations
   8) Example Repository
 
+## Concepts
+Here are a few concepts that you should be acquainted with as you go through this article. Don't worry if you
+aren't an expert with them, just understand their importance and how the structure is able to enable us to utilize
+these concepts.
+
+* [SOLID](https://scotch.io/bar-talk/s-o-l-i-d-the-first-five-principles-of-object-oriented-design)
+* [Separation of Concerns](https://medium.com/machine-words/separation-of-concerns-1d735b703a60)
+
+
 ## Project Folder Structure
 The below structure is what I use as a template in nearly all of my Node.js projects. This enables us to 
 implement [Separation of Concerns](https://medium.com/machine-words/separation-of-concerns-1d735b703a60)
@@ -39,7 +48,10 @@ src
 ```
 
 ## 3-layer Architecture
-
+Building on the principle of [Separation of Concerns](https://medium.com/machine-words/separation-of-concerns-1d735b703a60)
+that we talked about earlier, the goal is to completely extract and separate our business logic from our API. Specifically,
+we **never** want our business logic to be present in our routes or controllers. By placing all of our business logic
+inside of services, we are able to test it without having to mock-up the Express `req` or `res` objects! &#1F9D0;
 ## Service Layer
 
 ## Unit Testing
