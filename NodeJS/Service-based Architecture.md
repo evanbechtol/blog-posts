@@ -66,8 +66,8 @@ how our application will flow.
 #### Question: Why can't I just place my business logic inside of my controller?
 This is a great question! Because our routes are (in this case) created using the Express framework, there's 
 a ton of extra fluff that is added to the `req` and `res` objects. If we want to test our business logic, we
-are now tasked with the burden of creating a mock of those entire objects! :cold_sweat:  By encapsulating all of our business logic
-inside of services, we are able to test it without having to mock-up the Express `req` or `res` objects! :relaxed:
+are now tasked with the burden of creating a mock of those entire objects :cold_sweat:! By encapsulating all of our business logic
+inside of services, we are able to test it without having to mock-up the Express `req` or `res` objects :relaxed:!
 
 ## Service Layer
 The service layer encapsulates and abstracts all of our business logic from the rest of the application.
