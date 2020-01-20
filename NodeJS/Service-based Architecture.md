@@ -5,9 +5,8 @@ testability, and maintainability *(just to name a few [non-functional requiremen
 
 After reading this article, you'll be able: 
   1) Create an intuitive and clean project structure
-  2) Properly document your code with the intention to improve usability and readability
-  3) Understand the difference between concepts; controllers, loaders, services
-  4) Create clean unit tests for your business logic
+  2) Understand the difference between concepts; controllers, loaders, services
+  3) Create clean unit tests for your business logic
 
 
 ## Table of contents
