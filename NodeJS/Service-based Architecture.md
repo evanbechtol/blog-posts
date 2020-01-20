@@ -52,6 +52,8 @@ Building on the principle of [Separation of Concerns](https://medium.com/machine
 that we talked about earlier, the goal is to completely extract and separate our business logic from our API. Specifically,
 we **never** want our business logic to be present in our routes or controllers. By placing all of our business logic
 inside of services, we are able to test it without having to mock-up the Express `req` or `res` objects! :relaxed:
+
+![3-layer Architecture](https://softwareontheroad.com/static/122dab3154cb7e417bbb210bbce7ca01/62eec/server_layers.jpg)
 ## Service Layer
 
 ## Unit Testing
