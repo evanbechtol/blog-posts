@@ -81,6 +81,73 @@ The service layer encapsulates and abstracts all of our business logic from the 
   * Handle responding to clients
   * Provide anything related to HTTP Transport layer; status codes, headers, etc.
   * Directly interact with the database
+  
+#### Example 
+Here, our controller is importing the service that we will use to create posts.
+Notice that we don't have any business logic in this file!
+
+```javascript
+// controllers/Post/index.js
+
+const PostService = require( "../services/PostService" );
+const PostServiceInstance = new PostService();
+
+module.exports = { createCord };
+
+/**
+ * @description Create a cord with the provided body
+ * @param req {object} Express req object 
+ * @param res {object} Express res object
+ * @returns {Promise<*>}
+ */
+async function createCord ( req, res ) {
+  try {
+    // We only pass the body object, never the req object
+    const createdCord = await PostServiceInstance.create( req.body );
+    return res.send( createdCord );
+  } catch ( err ) {
+    res.status( 500 ).send( err );
+  }
+}
+```
+
+Our service implements all of our logic and cna leverage the data access layer to
+interact with the database! Once our logic reaches a result, we return the data, or an 
+error if one occurred, to the controller.
+```javascript
+// services/PostService.js
+
+const MongooseService = require( "MongooseService" ); // Data Access Layer
+const PostModel = require( "../models/post" ); // Database Model
+
+class PostService {
+  /**
+   * @description Create an instance of PostService
+   */
+  constructor () {
+    // Create instance of Data Access layer using our desired model
+    this.MongooseServiceInstance = new MongooseService( PostModel );
+  }
+
+  /**
+   * @description Attempt to create a post with the provided object
+   * @param postToCreate {object} Object containing all required fields to
+   * create post
+   * @returns {Promise<{success: boolean, error: *}|{success: boolean, body: *}>}
+   */
+  async createPost ( postToCreate ) {
+    try {
+      const result = await this.MongooseServiceInstance.create( postToCreate );
+      return { success: true, body: result };
+    } catch ( err ) {
+      return { success: false, error: err };
+    }
+  }
+}
+
+module.exports = PostService;
+```
+
 ## Unit Testing
 
 ## Controller Layer
