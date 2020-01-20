@@ -18,3 +18,20 @@ After reading this article, you'll be able:
   5) Controller Layer
   6) Loaders
   7) Application Configurations
+  8) Example Repository
+
+## Project Folder Structure
+
+## 3-layer Architecture
+
+## Service Layer
+
+## Unit Testing
+
+## Controller Layer
+
+## Loaders
+
+## Application Configurations
+
+## Example Repository
