@@ -10,3 +10,11 @@ After reading this article, you'll be able:
   4) Create clean unit tests for your business logic
 
 
+## Table of contents
+  1) Project Folder Structure
+  2) 3-layer (Service-oriented) Architecture
+  3) Service Layer
+  4) Unit Testing
+  5) Controller Layer
+  6) Loaders
+  7) Application Configurations
