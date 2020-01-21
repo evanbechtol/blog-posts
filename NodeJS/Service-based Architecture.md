@@ -441,3 +441,12 @@ It's that simple! then you can simply import the file wherever you need it, and 
 
 ## Example Repository
 You can find an example repo that demonstrates how this structure can be implemented on [my GitHub](https://github.com/evanbechtol/bare-express)
+
+## References and Resources
+I can't take credit for everything here, and definitely got some help! Please check out these other resources that inspired me.
+
+* [Bulletproof Node.js Project Architecture](https://dev.to/santypk4/bulletproof-node-js-project-architecture-4epf#configs)
+* [Scotch.io](https://scotch.io/bar-talk/s-o-l-i-d-the-first-five-principles-of-object-oriented-design)
+* [Stackify](https://stackify.com/oop-concept-for-beginners-what-is-encapsulation/)
+* [Agilealliance](https://www.agilealliance.org/glossary/tdd/)
+* [Hackernoon](https://hackernoon.com/hn-images/1*PctatMK2pwPm2NrXuFs-ew.png)
