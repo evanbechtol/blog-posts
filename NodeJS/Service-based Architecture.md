@@ -242,10 +242,180 @@ To really drive this point home, compare this example with the one below it. Ask
 to maintain, which would be easier to scale and expand upon, which one would be easier to remove later on if no longer needed.
 
 ##### What not to do (BAD)
+```javascript
+const bodyParser  = require( 'body-parser' );
+const config      = require( './config' );
+const express     = require( 'express' );
+const morgan      = require( 'morgan' );
+const path        = require( 'path' );
+const routes      = require( './routes' );
+const rfs         = require( 'rotating-file-stream' );
+const compression = require( 'compression' );
 
+let fs     = require( 'fs' ),
+    logDir = path.join( __dirname, config.logDir );
+
+// Check for 'logs' directory
+fs.access( logDir, ( err ) => {
+  if ( err ) {
+    fs.mkdirSync( logDir );
+  }
+} );
+
+// Initialize express instance, and log rotation
+let app             = express(),
+    accessLogStream = rfs( 'access.log', {
+      interval : '1d',
+      path     : logDir
+    } );
+
+// Setup views and pathing
+app.set( 'view engine', 'html' );
+app.set( 'views', path.join( __dirname, 'public' ) );
+
+// Serve static content
+app.use( express.static( path.join( __dirname, 'public' ) ) );
+app.use( express.static( path.join( __dirname, 'node_modules' ) ) );
+
+// Set up middleware
+app.use( morgan( 'dev', { stream : accessLogStream } ) );
+app.use( compression() );
+app.use( bodyParser.urlencoded( {
+  extended : false,
+  limit    : '20mb'
+} ) );
+app.use( bodyParser.json( { limit : '20mb' } ) );
+
+// Pass app to routes
+routes( app );
+
+// Start application
+app.listen( config.port, () => {
+  console.log( 'Now listening on', config.port );
+
+} );
+```
 
 ##### What to do (GOOD)
-  
+```javascript
+const config = require( "./config" );
+const mongoose = require( "mongoose" );
+const logger = require( "./services/Logger" );
+
+const mongooseOptions = {
+  useCreateIndex: true,
+  useNewUrlParser: true,
+  autoReconnect: true
+};
+
+mongoose.Promise = global.Promise;
+
+// Connect to the DB an initialize the app if successful
+mongoose.connect( config.dbUrl, mongooseOptions )
+  .then( () => {
+    logger.info( "Database connection successful" );
+
+    // Create express instance to setup API
+    const ExpressLoader = require( "./loaders/Express" );
+    new ExpressLoader();
+  } )
+  .catch( err => {
+    //eslint-disable-next-line
+    console.error( err );
+    logger.error( err );
+  } );
+```
+
+It's very easy to tell which file is more maintainable, readable, scalable, etc. Now, to show you what the loader looks like.
+In the example above, you'll notice we have one loader, the `ExpressLoader`. Here is how the loader is structured
+
+```javascript
+const bodyParser = require( "body-parser" );
+const express = require( "express" );
+const morgan = require( "morgan" );
+const path = require( "path" );
+const routes = require( "../routes" );
+const compression = require( "compression" );
+const logger = require( "../services/Logger" );
+const config = require( "../config" );
+
+class ExpressLoader {
+  constructor () {
+    const app = express();
+
+    // Setup error handling, this must be after all other middleware
+    app.use( ExpressLoader.errorHandler );
+
+    // Serve static content
+    app.use( express.static( path.join( __dirname, "uploads" ) ) );
+
+    // Set up middleware
+    app.use( morgan( "dev" ) );
+    app.use( compression() );
+    app.use( bodyParser.urlencoded( {
+      extended: false,
+      limit: "20mb"
+    } ) );
+    app.use( bodyParser.json( { limit: "20mb" } ) );
+
+    // Pass app to routes
+    routes( app );
+
+
+    // Start application
+    this.server = app.listen( config.port, () => {
+      logger.info( `Express running, now listening on port ${config.port}` );
+    } );
+  }
+
+  get Server () {
+    return this.server;
+  }
+
+  /**
+   * @description Default error handler to be used with express
+   * @param error Error object
+   * @param req {object} Express req object
+   * @param res {object} Express res object
+   * @param next {function} Express next object
+   * @returns {*}
+   */
+  static errorHandler ( error, req, res, next ) {
+    let parsedError;
+
+    // Attempt to gracefully parse error object
+    try {
+      if ( error && typeof error === "object" ) {
+        parsedError = JSON.stringify( error );
+      } else {
+        parsedError = error;
+      }
+    } catch ( e ) {
+      logger.error( e );
+    }
+
+    // Log the original error
+    logger.error( parsedError );
+
+    // If response is already sent, don't attempt to respond to client
+    if ( res.headersSent ) {
+      return next( error );
+    }
+
+    res.status( 400 ).json( {
+      success: false,
+      error
+    } );
+  }
+}
+
+module.exports = ExpressLoader;
+```
+
+What we have done is abstracted our startup logic for express into a single file. This enables us to easily remove/replace
+the framework later on if we choose to. This also makes it much more easy to debug or track down issues, rather than having to 
+check in multiple places, or a monster file.
+
 ## Application Configurations
 
 ## Example Repository
