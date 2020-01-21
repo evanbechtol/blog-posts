@@ -419,7 +419,7 @@ check in multiple places, or a monster file.
 ## Application Configurations
 You should take great care to never expose your application secrets and configurations. The last thing that you want
 is for a malicious entity to have all the back doors flung wide-open for them to do whatever they want! There are
-some fantastic modules out there; [dotenv]() which can give your some amazing functionality to protect your app secrets.
+some fantastic modules out there; [dotenv](https://www.npmjs.com/package/dotenv) which can give your some amazing functionality to protect your app secrets.
 But for the sake of simplicity, we are going to create an `index.js` file in our `config` directory. This will hold
 all of our application configuration parameters for us, which we can use in our other files.
 
