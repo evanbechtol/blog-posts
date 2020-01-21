@@ -440,3 +440,4 @@ module.exports = config;
 It's that simple! then you can simply import the file wherever you need it, and reference the variables.
 
 ## Example Repository
+You can find an example repo that demonstrates how this structure can be implemented on [my GitHub](https://github.com/evanbechtol/bare-express)
