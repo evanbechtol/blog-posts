@@ -115,7 +115,7 @@ error if one occurred) to the controller.
 ```javascript
 // services/PostService.js
 
-const MongooseService = require( "MongooseService" ); // Data Access Layer
+const MongooseService = require( "./MongooseService" ); // Data Access Layer
 const PostModel = require( "../models/post" ); // Database Model
 
 class PostService {
@@ -147,7 +147,65 @@ module.exports = PostService;
 ```
 
 ## Unit Testing
+Creating thorough tests for your code is essential for ensuring that your code is maintainable, and reliable.
+If you follow the mindset of [Test-Driven Development (TDD)](https://www.agilealliance.org/glossary/tdd/), then you should
+be creating unit tests **before** you begin writing any code. This enables us to ensure that we write the minimal amount
+of code required to meet the requirements at hand, and once development is completed, our tests are already there!
+![tdd flow](https://hackernoon.com/hn-images/1*PctatMK2pwPm2NrXuFs-ew.png)
 
+There are many modules and ways to test your code, but in this example we will be using a combination of [mocha](https://mochajs.org/), [chai](https://www.chaijs.com/), and [nyc](https://www.npmjs.com/package/nyc).
+This will give us a lot of flexibility for creating unit tests, and also let us know how much code is covered by our tests!
+
+##### 1) To get started, add these 3 modules to our project
+```npm i -s nyc mocha chai```
+
+##### 2) Now create a new directory under the `test` directory for our `Post` tests
+```
+src
+│   index.js        # Entry point for application
+... // Other directories
+└───test            # Tests go here
+  └─── Post         # All tests for 'Posts' go here
+       |  index.js
+```
+
+##### 3) Open `test/Post/index.js` and paste the following code
+```javascript
+const assert = require( "chai" ).assert;
+const mocha = require( "mocha" );
+const PostService = require( "../../services/PostService" ); // Import the service we want to test
+
+mocha.describe( "Post Service", () => {
+  const PostServiceInstance = new PostService();
+  
+  mocha.describe( "Create instance of service", () => {
+     it( "Is not null", () => {
+       assert.isNotNull( PostServiceInstance );
+     } );
+   
+     it( "Exposes the createPost method", () => {
+       assert.isFunction( PostServiceInstance.createPost );
+     } );
+   } );
+} );
+```
+
+##### 4) Run the tests using the following command
+```mocha test/* --reporter spec```
+
+You should get output similar to this:
+```
+Post Service
+       Create instance of service
+         √ Is not null
+         √ Exposes the createPost method
+     2 passing (29ms)
+```
+
+Now, I know that we didn't do this in a true TDD fashion; we wrote the code *before* writing the test.
+But because this article is more focused on the 3-layer architecture, I felt that it was important to first introduce
+the concept of services before unit tests. Just know that if you were to put this into practice on your own,
+it will benefit you greatly to write the tests prior to the code :sunglasses:.
 ## Controller Layer
 
 ## Loaders
