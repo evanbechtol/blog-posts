@@ -133,7 +133,7 @@ class PostService {
    * create post
    * @returns {Promise<{success: boolean, error: *}|{success: boolean, body: *}>}
    */
-  async createPost ( postToCreate ) {
+  async create ( postToCreate ) {
     try {
       const result = await this.MongooseServiceInstance.create( postToCreate );
       return { success: true, body: result };
@@ -184,7 +184,7 @@ mocha.describe( "Post Service", () => {
      } );
    
      it( "Exposes the createPost method", () => {
-       assert.isFunction( PostServiceInstance.createPost );
+       assert.isFunction( PostServiceInstance.create );
      } );
    } );
 } );
