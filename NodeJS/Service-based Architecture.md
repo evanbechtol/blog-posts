@@ -417,5 +417,26 @@ the framework later on if we choose to. This also makes it much more easy to deb
 check in multiple places, or a monster file.
 
 ## Application Configurations
+You should take great care to never expose your application secrets and configurations. The last thing that you want
+is for a malicious entity to have all the back doors flung wide-open for them to do whatever they want! There are
+some fantastic modules out there; [dotenv]() which can give your some amazing functionality to protect your app secrets.
+But for the sake of simplicity, we are going to create an `index.js` file in our `config` directory. This will hold
+all of our application configuration parameters for us, which we can use in our other files.
+
+```javascript
+// config/index.js
+
+const config = {
+  dbUrl: process.env.DBURL || "mongodb://localhost/test-db",
+  port: process.env.PORT || 3000,
+  env: process.env.NODE_ENV || "development",
+  logDir: process.env.LOGDIR || "logs",
+  viewEngine: process.env.VIEW_ENGINE || "html"
+};
+
+module.exports = config;
+```  
+
+It's that simple! then you can simply import the file wherever you need it, and reference the variables.
 
 ## Example Repository
