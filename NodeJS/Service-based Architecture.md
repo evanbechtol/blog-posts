@@ -208,10 +208,44 @@ the concept of services before unit tests. Just know that if you were to put thi
 it will benefit you greatly to write the tests prior to the code :sunglasses:.
 
 Now that you have written your first tests, it's time to examine how we utilize our services in the Controller!
+
 ## Controller Layer
+The controller layer is responsible for handling client requests, and responding to them. Just to reiterate a very important point,
+**this layer should never contain business logic!** We only leverage the services by passing the data that they need, not
+the `req` or `res` objects themselves. This enables our services to remain framework agnostic!
+
+I showed an example of the controller layer above, which you can also find here *(no need to re-invent the wheel)*.
+
+```javascript
+/**
+ * @description Create a cord with the provided body
+ * @param req {object} Express req object 
+ * @param res {object} Express res object
+ * @returns {Promise<*>}
+ */
+async function createCord ( req, res ) {
+  try {
+    // We only pass the body object, never the req object
+    const createdCord = await PostServiceInstance.create( req.body );
+    return res.send( createdCord );
+  } catch ( err ) {
+    res.status( 500 ).send( err );
+  }
+}
+```
 
 ## Loaders
+Loaders abstract all of our application startup processes into specific modules. This enables us to encapsulate and
+maintain Separation of Concerns. If you dump everything into your application entry point, it gets cluttered very quickly.
 
+To really drive this point home, compare this example with the one below it. Ask yourself which one would be easier
+to maintain, which would be easier to scale and expand upon, which one would be easier to remove later on if no longer needed.
+
+##### What not to do (BAD)
+
+
+##### What to do (GOOD)
+  
 ## Application Configurations
 
 ## Example Repository
