@@ -206,6 +206,8 @@ Now, I know that we didn't do this in a true TDD fashion; we wrote the code *bef
 But because this article is more focused on the 3-layer architecture, I felt that it was important to first introduce
 the concept of services before unit tests. Just know that if you were to put this into practice on your own,
 it will benefit you greatly to write the tests prior to the code :sunglasses:.
+
+Now that you have written your first tests, it's time to examine how we utilize our services in the Controller!
 ## Controller Layer
 
 ## Loaders
