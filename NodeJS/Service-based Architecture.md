@@ -1,6 +1,6 @@
 # Node Service-oriented Architecture
 Whether you are a beginner or an expert to Node.js, at the beginning of each project it's imperative that
-you create a sound architectural landscape. This will enable you to grow your project while maintaining readability,
+you create a sound architectural landscape. This will enable you to grow your project while ensuring readability,
 testability, and maintainability *(just to name a few [non-functional requirements](https://www.guru99.com/non-functional-requirement-type-example.html#2))*.
 
 After reading this article, you'll be able: 
