@@ -9,7 +9,7 @@ After reading this article, you'll be able:
   3) Create clean unit tests for your business logic
 
 
-## Table of contents
+## Table of contents :bookmark_tabs:
   0) Concepts
   1) Project Folder Structure
   2) 3-layer (Service-oriented) Architecture
@@ -20,7 +20,7 @@ After reading this article, you'll be able:
   7) Application Configurations
   8) Example Repository
 
-## Concepts
+## Concepts :nut_and_bolt:
 Here are a few concepts that you should be acquainted with as you go through this article. Don't worry if you
 aren't an expert with them, just understand their importance and how the structure enables us to utilize these concepts.
 
@@ -30,7 +30,7 @@ aren't an expert with them, just understand their importance and how the structu
 * [Encapsulation](https://stackify.com/oop-concept-for-beginners-what-is-encapsulation/)
 * [Unit Testing](https://stackoverflow.com/a/1393/4515720)
 
-## Project Folder Structure
+## Project Folder Structure :open_file_folder:
 The below structure is what I use as a template in nearly all of my Node.js projects. This enables us to 
 implement [Separation of Concerns](https://medium.com/machine-words/separation-of-concerns-1d735b703a60)
 for our application.
@@ -47,7 +47,7 @@ src
 └───test            # Tests go here
 ```
 
-## 3-layer Architecture
+## 3-layer Architecture :sparkling_heart:
 Building on the principle of [Separation of Concerns](https://medium.com/machine-words/separation-of-concerns-1d735b703a60)
 that we talked about earlier, the goal is to completely extract and separate our business logic from our API. Specifically,
 we **never** want our business logic to be present in our routes or controllers. In the picture below, you'll see exactly 
@@ -67,7 +67,7 @@ a ton of extra fluff that is added to the `req` and `res` objects. If we want to
 are now tasked with the burden of creating a mock of those entire objects :cold_sweat:! By encapsulating all of our business logic
 inside of services, we are able to test it without having to mock-up the Express `req` or `res` objects :relaxed:!
 
-## Service Layer
+## Service Layer :factory:
 The service layer encapsulates and abstracts all of our business logic from the rest of the application.
 
 * **The Service Layer SHOULD**:
@@ -146,7 +146,7 @@ class PostService {
 module.exports = PostService;
 ```
 
-## Unit Testing
+## Unit Testing :heavy_check_mark:
 Creating thorough tests for your code is essential for ensuring that your code is maintainable, and reliable.
 If you follow the mindset of [Test-Driven Development (TDD)](https://www.agilealliance.org/glossary/tdd/), then you should
 be creating unit tests **before** you begin writing any code. This enables us to ensure that we write the minimal amount
@@ -209,7 +209,7 @@ it will benefit you greatly to write the tests prior to the code :sunglasses:.
 
 Now that you have written your first tests, it's time to examine how we utilize our services in the Controller!
 
-## Controller Layer
+## Controller Layer :control_knobs:
 The controller layer is responsible for handling client requests, and responding to them. Just to reiterate a very important point,
 **this layer should never contain business logic!** We only leverage the services by passing the data that they need, not
 the `req` or `res` objects themselves. This enables our services to remain framework agnostic!
@@ -234,14 +234,14 @@ async function createCord ( req, res ) {
 }
 ```
 
-## Loaders
+## Loaders :floppy_disk:
 Loaders abstract all of our application startup processes into specific modules. This enables us to encapsulate and
 maintain Separation of Concerns. If you dump everything into your application entry point, it gets cluttered very quickly.
 
 To really drive this point home, compare this example with the one below it. Ask yourself which one would be easier
 to maintain, which would be easier to scale and expand upon, which one would be easier to remove later on if no longer needed.
 
-##### What not to do (BAD)
+##### What not to do (BAD) :x:
 ```javascript
 const bodyParser  = require( 'body-parser' );
 const config      = require( './config' );
@@ -296,7 +296,7 @@ app.listen( config.port, () => {
 } );
 ```
 
-##### What to do (GOOD)
+##### What to do (GOOD) :100:
 ```javascript
 const config = require( "./config" );
 const mongoose = require( "mongoose" );
@@ -416,7 +416,7 @@ What we have done is abstracted our startup logic for express into a single file
 the framework later on if we choose to. This also makes it much more easy to debug or track down issues, rather than having to 
 check in multiple places, or a monster file.
 
-## Application Configurations
+## Application Configurations :clipboard:
 You should take great care to never expose your application secrets and configurations. The last thing that you want
 is for a malicious entity to have all the back doors flung wide-open for them to do whatever they want! There are
 some fantastic modules out there; [dotenv](https://www.npmjs.com/package/dotenv) which can give your some amazing functionality to protect your app secrets.
@@ -439,10 +439,10 @@ module.exports = config;
 
 It's that simple! then you can simply import the file wherever you need it, and reference the variables.
 
-## Example Repository
+## Example Repository :gift:
 You can find an example repo that demonstrates how this structure can be implemented on [my GitHub](https://github.com/evanbechtol/bare-express)
 
-## References and Resources
+## References and Resources :gem:
 I can't take credit for everything here, and definitely got some help! Please check out these other resources that inspired me.
 
 * [Bulletproof Node.js Project Architecture](https://dev.to/santypk4/bulletproof-node-js-project-architecture-4epf#configs)
