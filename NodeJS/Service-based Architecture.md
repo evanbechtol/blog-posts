@@ -10,15 +10,16 @@ After reading this article, you'll be able:
 
 
 ## Table of contents :bookmark_tabs:
-  0) [Concepts](#concepts-)
-  1) Project Folder Structure
-  2) 3-layer (Service-oriented) Architecture
-  3) Service Layer
-  4) Unit Testing
-  5) Controller Layer
-  6) Loaders
-  7) Application Configurations
-  8) Example Repository
+  * [Concepts](#concepts-nut_and_bolt)
+  * [Project Folder Structure](#project-folder-structure-open_file_folder)
+  * [3-layer (Service-oriented) Architecture](#3-layer-architecture-sparkling_heart)
+  * [Service Layer](#service-layer-factory)
+  * [Unit Testing](#unit-testing-heavy_check_mark)
+  * [Controller Layer](#controller-layer-control_knobs)
+  * [Loaders](#loaders-floppy_disk)
+  * [Application Configurations](#application-configurations-clipboard)
+  * [Example Repository](#example-repository-gift)
+  * [References and Resources](#references-and-resources-gem)
 
 ## Concepts :nut_and_bolt:
 Here are a few concepts that you should be acquainted with as you go through this article. Don't worry if you
