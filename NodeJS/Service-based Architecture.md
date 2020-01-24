@@ -10,7 +10,7 @@ After reading this article, you'll be able:
 
 
 ## Table of contents :bookmark_tabs:
-  0) Concepts
+  0) [Concepts](#concepts-)
   1) Project Folder Structure
   2) 3-layer (Service-oriented) Architecture
   3) Service Layer
